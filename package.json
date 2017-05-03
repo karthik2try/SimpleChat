@@ -1,0 +1,23 @@
+{
+  "name": "simple-chat",
+  "version": "1.0.0",
+  "description": "Simple Chat app using socket.io",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karthik2try/SimpleChat.git"
+  },
+  "author": "karthik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karthik2try/SimpleChat/issues"
+  },
+  "homepage": "https://github.com/karthik2try/SimpleChat#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  }
+}
