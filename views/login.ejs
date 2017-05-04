@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>login</title>
+    <style>
+      #login-div{
+        position: absolute;
+        margin: auto;
+        /*border: 1px solid black;*/
+        width: 25%;
+        height: 30%;
+        top:0;left:0;bottom:0;right:0;
+        border-radius: 10px;
+        background-image: url("https://designshack.net/wp-content/uploads/wattex-27.jpg");
+        padding: 5px;
+        /*outline-style: outset;
+        outline-color: grey;*/
+        box-shadow: 15px 15px 10px #888888;
+      }
+
+      #login-table{
+        border-collapse: collapse;
+        width: 100%;
+        /*border: 1px solid black;*/
+        padding: 5px;
+        margin-top:10%;
+      }
+
+      td,tr{
+        height: 100%;
+        padding: 5px;
+        text-align: center;
+        /*border: 1px solid black;*/
+      }
+      #user-name-txtbox{
+        width: 80%;
+        border: 1px solid grey;
+      }
+      #login-btn{
+        margin: 5% 10% 0 0;
+        float: right;
+        width: 20%;
+        height: 15%;
+        color: white;
+        background-color: #809fff;
+        border: none;
+        border-radius: 5px;
+      }
+      #login-btn:hover{
+        color: black;
+        background-color: #1a53ff;
+        box-shadow: 0 0 3px white, 0 0 5px white;
+        cursor: pointer;
+      }
+      #app-tittle{
+        color: white;
+        font-size: 24px;
+        text-align:center;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="login-div">
+      <h3 id="app-tittle">Simple Chat App</h3>
+      <form action="/login" method="post">
+      <table id="login-table">
+        <tr><td><label style="color:white;">user name :</label></td><td><input type="text" name="userName" id="user-name-txtbox" required/></td></tr>
+      </table>
+      <input type="submit" value="Join" id="login-btn"/>
+    </form>
+    </div>
+  </body>
+</html>

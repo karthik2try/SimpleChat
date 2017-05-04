@@ -1,9 +1,13 @@
-'use strict';
-const app = require('express')();
+const express = require('express');
+const app = express();
 const sockHttp = require('./socket');
+const bodyParser = require('body-parser');
 
+
+app.set('view engine','ejs');
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended:true}));
 app.use('/',require('./router'));
-
 sockHttp.socketHTTP(app).listen(3000,function(err){
   if(err){
     console.log(err);

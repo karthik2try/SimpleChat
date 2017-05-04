@@ -1,0 +1,174 @@
+#container{
+    position: absolute;
+    /*border: 1px solid grey;*/
+    height: 85%;
+    width: 50%;
+    margin: auto;
+    top:0;left: 0;right: 0;bottom: 0;
+    /*padding: 2px;*/
+    border-radius: 15px;
+    box-shadow: 15px 15px 10px #888888;
+}
+#container-head{
+  /*border: 1px solid #6699ff;*/
+  height: 10%;
+  width: 100%;
+  border-radius: 15px 15px 0 0px;
+  font-style: italic;
+  background-color: #6699ff;
+  display: block;
+}
+#container-body a{
+  text-decoration: none;
+}
+#container-body{
+  border-bottom: 1px solid #6699ff;
+  height: 75%;
+  width: 100%;
+}
+#title-td{
+  text-overflow: clip;
+  max-width: 80%;
+  text-align: left;
+  text-indent: 10%;
+  color: white;
+}
+#link-td{
+  text-align: right;
+  text-overflow: clip;
+  max-width: 20%;
+  color: red;
+}
+#link-td a{
+  text-decoration: none;
+  color: green;
+  font-style: normal;
+}
+#title-tbl{
+  width: 90%;
+}
+#chatroom-list{
+  margin: 10px;
+  background: #6699ff;
+  max-width: 95%;
+  border-radius: 5px;
+  padding: 0 5px  5px 5px;
+  min-height: 7%;
+  float: left;
+  /*border: 1px solid black;*/
+}
+#msg-header{
+  border-bottom:  1px solid white;
+  width: 100%;
+  margin: 0;
+  padding: 2px;
+  height: 18px;
+}
+#time-stamp{
+  float: right;
+}
+#msg-user{
+  float: left;
+  text-decoration: none;
+}
+#list-tbl{
+    width: 90%;
+    padding: 7px;
+    /*top:0;left: 0;right: 0;bottom: 0;*/
+    /*border: 1px solid black;*/
+    margin: auto;
+}
+#content-td{
+  font-size: 17px;
+  font-family: monospace;
+  width: 70%;
+  color: #6699ff;
+  text-align: left;
+}
+#user-td{
+  width: 30%;
+  font-size: 14px;
+  color: black;
+  font-style: italic;
+  text-align: center;
+}
+#container-foot{
+  display: inline-block;
+  height: 15%;
+  margin-top: 2px;
+  border-radius: 0 0 10px 10px;
+  width: 100%;
+  /*border-bottom:1px;
+  border-top: 0;
+  border-left:1px;
+  border-right:1px;*/
+  /*border-color: #6699ff;
+  border-style: solid;*/
+}
+#input-box{
+  padding: 1px;
+  margin-left: 10px;
+  height: 90%;
+  width: 72%;
+  /*border: 1px solid black;*/
+  float: left;
+}
+#create-btn{
+  padding-top: 15px;
+  float: right;
+  height: 60%;
+  width: 25%;
+  text-align: center;
+  /*border: 1px solid black;*/
+}
+#room-ip-box{
+  width: 99%;
+  border: none;
+  height: 100%;
+  border-radius: 0 0 0 10px;
+  font-size: 15px;
+}
+#room-ip-btn:hover{
+  background-color:#0080ff;
+}
+#room-ip-btn{
+  width: 50%;
+  background-color: #6699ff;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: auto;
+  height: 100%;
+}
+
+#chat-sec{
+  /*background-color: yellow;*/
+  overflow-y: auto;
+  width: 74%;
+  border-right: 1px solid #6699ff;
+  height: 100%;
+  float: left;
+}
+#user-list-sec{
+  overflow-y: auto;
+  float: right;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  /*background-color: red;*/
+  width: 25%;
+}
+#user-list-sec a{
+  text-decoration: none;
+}
+#user-name{
+  padding: 5px;
+  margin: 5px;
+  left: 0;
+  /*background-color: yellow;*/
+  height: 5%;
+  width: 88%;
+  border-bottom: 1px dotted black;
+}
