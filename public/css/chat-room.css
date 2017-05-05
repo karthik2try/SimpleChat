@@ -2,13 +2,12 @@
     position: absolute;
     /*border: 1px solid grey;*/
     height: 85%;
-    width: 50%;
+    width: 40%;
     margin: auto;
     top:0;left: 0;right: 0;bottom: 0;
     /*padding: 2px;*/
     border-radius: 15px;
     box-shadow: 0 10px 35px #888888,5px 10px 15px #888888;
-    /*box-shadow: 15px 15px 10px #888888;*/
 }
 #container-head{
   /*border: 1px solid #6699ff;*/
@@ -24,19 +23,18 @@
 }
 #container-body{
   border-bottom: 1px solid #6699ff;
-  height: 75%;
+  height: 82%;
   width: 100%;
+  overflow-y: auto;
 }
 #title-td{
-  text-overflow: clip;
-  max-width: 80%;
-  text-align: left;
-  text-indent: 10%;
+  text-overflow: ellipsis;
+  max-width: 60%;
+  text-align: center;
   color: white;
 }
 #link-td{
-  text-align: right;
-  text-overflow: clip;
+  text-overflow: ellipsis;
   max-width: 20%;
   color: red;
 }
@@ -46,31 +44,21 @@
   font-style: normal;
 }
 #title-tbl{
-  width: 90%;
+  width: 100%;
 }
 #chatroom-list{
   margin: 10px;
-  background: #6699ff;
-  max-width: 95%;
-  border-radius: 5px;
-  padding: 0 5px  5px 5px;
-  min-height: 7%;
-  float: left;
+  background: linear-gradient(#e6eeff, #ffffff,#e6eeff);
+  /*background: radial-gradient(#ffffff 25%, #e6eeff 75%);*/
+  width: 97%;
+  border-radius: 30px;
+  text-align: center;
+  height: 10%;
   /*border: 1px solid black;*/
 }
-#msg-header{
-  border-bottom:  1px solid white;
-  width: 100%;
-  margin: 0;
-  padding: 2px;
-  height: 18px;
-}
-#time-stamp{
-  float: right;
-}
-#msg-user{
-  float: left;
-  text-decoration: none;
+#chatroom-list:hover{
+  background: linear-gradient(#ccdcff,#ffffff,#ccdcff);
+  /*box-shadow: 5px 5px 3px #e6e6ff;*/
 }
 #list-tbl{
     width: 90%;
@@ -81,6 +69,7 @@
 }
 #content-td{
   font-size: 17px;
+  padding: 2px;
   font-family: monospace;
   width: 70%;
   color: #6699ff;
@@ -95,7 +84,7 @@
 }
 #container-foot{
   display: inline-block;
-  height: 15%;
+  height: 7%;
   margin-top: 2px;
   border-radius: 0 0 10px 10px;
   width: 100%;
@@ -108,21 +97,21 @@
 }
 #input-box{
   padding: 1px;
-  margin-left: 10px;
   height: 90%;
-  width: 72%;
+  width: 78%;
   /*border: 1px solid black;*/
   float: left;
 }
 #create-btn{
-  padding-top: 15px;
+  padding: 1px;
   float: right;
-  height: 60%;
-  width: 25%;
-  text-align: center;
+  height: 90%;
+  width: 18%;
+
   /*border: 1px solid black;*/
 }
 #room-ip-box{
+  text-indent: 10px;
   width: 99%;
   border: none;
   height: 100%;
@@ -133,43 +122,12 @@
   background-color:#0080ff;
 }
 #room-ip-btn{
-  width: 50%;
+  width: 99%;
   background-color: #6699ff;
   border: none;
   cursor: pointer;
   color: white;
   font-weight: bold;
-  border-radius: 5px;
-  margin: auto;
+  border-radius: 0 0 10px 0;
   height: 100%;
-}
-
-#chat-sec{
-  /*background-color: yellow;*/
-  overflow-y: auto;
-  width: 74%;
-  border-right: 1px solid #6699ff;
-  height: 100%;
-  float: left;
-}
-#user-list-sec{
-  overflow-y: auto;
-  float: right;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  /*background-color: red;*/
-  width: 25%;
-}
-#user-list-sec a{
-  text-decoration: none;
-}
-#user-name{
-  padding: 5px;
-  margin: 5px;
-  left: 0;
-  /*background-color: yellow;*/
-  height: 5%;
-  width: 88%;
-  border-bottom: 1px dotted black;
 }

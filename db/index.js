@@ -1,5 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://chatuser:chatpassword@ds129641.mlab.com:29641/simplechat',function(err){
   if(!err){
     console.log('connected to Mlab');
@@ -7,7 +8,6 @@ mongoose.connect('mongodb://chatuser:chatpassword@ds129641.mlab.com:29641/simple
 });
 
 const db = mongoose.connection;
-
 var chatRoomSchema = new mongoose.Schema({
   chatRooms:String,
   NoOfUsers:Number

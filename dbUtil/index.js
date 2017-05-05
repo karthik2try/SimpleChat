@@ -1,13 +1,27 @@
 'use strict';
 const db = require('../db');
 
-function getAllRooms(){
+function addRooms(data){
+
   return new Promise(function(resolve,reject){
-    db.chatRoomModel.find(function(err,data){
-      if(data === null){
-        resolve(null);
+    db.roomDetailsModel.findOne({roomName:data.chatRooms},function(err,result){
+      console.log('r - ',err);
+      if(result === null){
+        var newRoom = db.roomDetailsModel({
+          roomName:data.roomName,
+          users:[data.users]
+        });
+        newRoom.save((err)=>{
+          if(!err){
+            resolve('success');
+          }else{
+            reject(null);
+          }
+        });
+        console.log(newRoom);
+        resolve('success');
       }else{
-        resolve(data);
+        reject(null);
       }
     });
   });
@@ -16,7 +30,6 @@ function getAllRooms(){
 function addUser(userName){
   return new Promise(function(resolve,reject){
     db.userModel.findOne({userName:userName},function(err,data){
-      console.log(err);
       if(err){
         reject(null);
       }
@@ -33,5 +46,5 @@ function addUser(userName){
 
 module.exports = {
   addUser,
-  getAllRooms
+  addRooms
 }

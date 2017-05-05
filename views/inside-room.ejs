@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/inside-room.css"/>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <title>Chat Rooms</title>
+    <script>
+    var roomName = "<%=roomName%>";
+    var userName = "<%=userName%>";
+    var userListsHTML = "";
+    var socket = io('/chat');
+    var joinDetails = {roomName:roomName,userName:userName};
+    console.log(joinDetails);
+    socket.emit('join',joinDetails);
+    socket.on('getUserList',function(userLists){
+      for(var user of userLists){
+        userListsHTML += `<a href="#"><div id="user-name">${user}</div></a>`;
+      }
+      $('#user-list-sec').append(userListsHTML);
+    });
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="container-head">
+        <table id="title-tbl">
+          <tr><td id="title-td"><h2><%=roomName%></h2></td><td id="link-td"><a href="#">Leave Room</a> | <a href="#">Logout</a></td></tr>
+        </table>
+      </div>
+      <div id="container-body">
+        <div id="chat-sec">
+          <div id="chatroom-list">
+            <div id="msg-header">
+              <a href="#" id="msg-user">karthik</a>
+              <label id="time-stamp">8.13 pm</label>
+            </div>
+          I am doing online quiz app in php. I want to restrict user while going back in exam. I have tried following script but
+          </div>
+      </div>
+        <div id="user-list-sec">
+          <!-- <a href="#"><div id="user-name">karthik</div></a> -->
+        </div>
+        <!--  -->
+      </div>
+      <div id="container-foot">
+        <div id="input-box"><textarea id="room-ip-box" name="roomName" placeholder="type your msg here ...."></textarea></div>
+          <div id="create-btn"><input type="submit" id="room-ip-btn" value="send"/></div>
+      </div>
+    </div>
+  </body>
+</html>

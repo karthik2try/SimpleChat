@@ -3,177 +3,64 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/chat-room.css"/>
     <title>Chat Rooms</title>
-    <style>
-      #container{
-          position: absolute;
-          /*border: 1px solid grey;*/
-          height: 85%;
-          width: 40%;
-          margin: auto;
-          top:0;left: 0;right: 0;bottom: 0;
-          /*padding: 2px;*/
-          border-radius: 15px;
-          box-shadow: 15px 15px 10px #888888;
-      }
-      #container-head{
-        /*border: 1px solid #6699ff;*/
-        height: 10%;
-        width: 100%;
-        border-radius: 15px 15px 0 0px;
-        font-style: italic;
-        background-color: #6699ff;
-        display: block;
-      }
-      #container-body a{
-        text-decoration: none;
-      }
-      #container-body{
-        border-bottom: 1px solid #6699ff;
-        height: 82%;
-        width: 100%;
-        overflow-y: auto;
-      }
-      #title-td{
-        text-overflow: ellipsis;
-        max-width: 60%;
-        text-align: center;
-        color: white;
-      }
-      #link-td{
-        text-overflow: ellipsis;
-        max-width: 20%;
-        color: red;
-      }
-      #link-td a{
-        text-decoration: none;
-        color: green;
-        font-style: normal;
-      }
-      #title-tbl{
-        width: 100%;
-      }
-      #chatroom-list{
-        margin: 10px;
-        background: linear-gradient(#e6eeff, #ffffff,#e6eeff);
-        /*background: radial-gradient(#ffffff 25%, #e6eeff 75%);*/
-        width: 97%;
-        border-radius: 30px;
-        text-align: center;
-        height: 10%;
-        /*border: 1px solid black;*/
-      }
-      #chatroom-list:hover{
-        background: linear-gradient(#ccdcff,#ffffff,#ccdcff);
-        /*box-shadow: 5px 5px 3px #e6e6ff;*/
-      }
-      #list-tbl{
-          width: 90%;
-          padding: 7px;
-          /*top:0;left: 0;right: 0;bottom: 0;*/
-          /*border: 1px solid black;*/
-          margin: auto;
-      }
-      #content-td{
-        font-size: 17px;
-        font-family: monospace;
-        width: 70%;
-        color: #6699ff;
-        text-align: left;
-      }
-      #user-td{
-        width: 30%;
-        font-size: 14px;
-        color: black;
-        font-style: italic;
-        text-align: center;
-      }
-      #container-foot{
-        display: inline-block;
-        height: 7%;
-        margin-top: 2px;
-        border-radius: 0 0 10px 10px;
-        width: 100%;
-        /*border-bottom:1px;
-        border-top: 0;
-        border-left:1px;
-        border-right:1px;*/
-        /*border-color: #6699ff;
-        border-style: solid;*/
-      }
-      #input-box{
-        padding: 1px;
-        height: 90%;
-        width: 78%;
-        /*border: 1px solid black;*/
-        float: left;
-      }
-      #create-btn{
-        padding: 1px;
-        float: right;
-        height: 90%;
-        width: 18%;
-
-        /*border: 1px solid black;*/
-      }
-      #room-ip-box{
-        text-indent: 10px;
-        width: 99%;
-        border: none;
-        height: 100%;
-        border-radius: 0 0 0 10px;
-        font-size: 15px;
-      }
-      #room-ip-btn:hover{
-        background-color:#0080ff;
-      }
-      #room-ip-btn{
-        width: 99%;
-        background-color: #6699ff;
-        border: none;
-        cursor: pointer;
-        color: white;
-        font-weight: bold;
-        border-radius: 0 0 10px 0;
-        height: 100%;
-      }
-    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <script>
-      var roomsa = '<%=rooms%>';
-      console.log(roomsa[0]);
-      for(var r in roomsa){
-          console.log(r);
-          console.log(r[chatRooms]);
+      var socket = io('/rooms');
+      var container_body = $('.container-body');
+      let userName = '<%=userName%>';
+      socket.emit('getRooms');
+      socket.on('roomDetails',function(data){
+        console.log(data);
+        let chatRoomsList = '';
+        for(var i of data){
+          chatRoomsList += populateChatRooms(i);
+        }
+        $('.container-body').append(chatRoomsList);
+      });
+
+      function populateChatRooms(roomsList){
+
+
+        return `<a href="/room/<%=userName%>/${roomsList.roomName}"><div id="chatroom-list">
+          <table id="list-tbl">
+          <tr><td id="content-td">${roomsList.roomName}</td><td id="user-td">users : ${roomsList.users.length}</td><tr>
+          </table>
+        </div></a>`;
       }
+
+      function addRoom(){
+        console.log('clicked');
+        var newRoom = {
+          roomName:document.getElementById("room-ip-box").value,
+          users:[]
+        }
+        socket.emit('createNewRoom',{roomName:document.getElementById("room-ip-box").value,users:[]});
+        $('.container-body').append(populateChatRooms(newRoom));
+        document.getElementById("room-ip-box").value = "";
+      }
+
     </script>
   </head>
   <body>
     <div id="container">
       <div id="container-head">
         <table id="title-tbl">
-          <tr><td id="title-td"><h3>Please select/create chatroom</h3></td><td id="link-td">Hi karthik!!</td><td id="link-td"><a href="#">Logout</a></td></tr>
+          <tr><td id="title-td"><h3>Please select/create chatroom</h3></td><td id="link-td">Hi <%=userName%></td><td id="link-td"><a href="#">Logout</a></td></tr>
         </table>
       </div>
-      <div id="container-body">
-        <a href="#"><div id="chatroom-list">
+      <div id="container-body" class="container-body">
+        <!-- <a href="#"><div id="chatroom-list">
           <table id="list-tbl">
           <tr><td id="content-td">Favourite food</td><td id="user-td">users : 2</td><tr>
           </table>
-        </div></a>
-        <a href="#"><div id="chatroom-list">
-          <table id="list-tbl">
-          <tr><td id="content-td">Favourite food</td><td id="user-td">users : 2</td><tr>
-          </table>
-        </div></a>
-        <a href="#"><div id="chatroom-list">
-          <table id="list-tbl">
-          <tr><td id="content-td">Favourite food</td><td id="user-td">users : 2</td><tr>
-          </table>
-        </div></a>
+        </div></a> -->
       </div>
       <div id="container-foot">
         <div id="input-box"><input type="text" placeholder="type new room name ...." id="room-ip-box" name="roomName"/></div>
-          <div id="create-btn"><input type="submit" id="room-ip-btn" value="create"/></div>
+          <div id="create-btn"><button id="room-ip-btn" onclick="addRoom()">create</button></div>
       </div>
     </div>
   </body>
