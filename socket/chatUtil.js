@@ -7,6 +7,7 @@ module.exports = function(socket){
     socket.join(data.roomName);
     dbUtil.addChatID(data.userName,socket.id,data.roomName);
     db.roomDetailsModel.findOne({roomName:data.roomName},function(err,roomDetails){
+      console.log('rd : ',roomDetails);
       if(roomDetails.users != null || roomDetails.users != undefined){
         if(roomDetails.users.length === 1 && roomDetails.users[0] === ""){
           roomDetails.users.pop("");
@@ -14,7 +15,7 @@ module.exports = function(socket){
       }
       roomDetails.users.push(data.userName);
       socket.emit('getUserList',roomDetails.users);
-      socket.broadcast.emit('getUserList',roomDetails.users);
+      socket.broadcast.to(data.roomName).emit('getUserList',roomDetails.users);
       roomDetails.save();
     })
   });
@@ -22,7 +23,8 @@ module.exports = function(socket){
   socket.on('disconnect',function(){
     dbUtil.findUserDetailsCI(socket.id)
       .then(function(user){
-        dbUtil.removeUserByChatId(socket.id);
+        // dbUtil.removeUserByChatId(socket.id);
+        console.log(user);
         dbUtil.removeUserFromChatRoom(user)
           .then(function(updatedUserList){
             if(updatedUserList.length > 0){

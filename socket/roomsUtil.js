@@ -3,6 +3,7 @@ const db = require('../db');
 const dbUtil = require('../dbUtil');
 module.exports = function(socket){
   socket.on('registerSocketID',function(userName){
+    console.log(userName,'room_id : ',socket.id);
     dbUtil.addRoomsID(userName,socket.id);
   });
   socket.on('createNewRoom',function(data){

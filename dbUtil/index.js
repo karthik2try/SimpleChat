@@ -1,8 +1,21 @@
 'use strict';
 const db = require('../db');
 
+function removeUser(){
+  return new Promise(function(resolve,reject){
+    db.userModel.remove({chat_id:chat_id},function(err){
+      if(!err){
+        resolve(true);
+      }else{
+        reject(false);
+      }
+    });
+  })
+}
+
 function addRoomsID(userName,room_id){
   db.userModel.findOne({userName:userName},function(err,result){
+    console.log('room result :', result);
     result.room_id = room_id;
     result.save();
   });
@@ -61,24 +74,28 @@ function removeUserFromChatRoom(user){
   return new Promise(function(resolve,reject){
     db.roomDetailsModel.findOne({roomName:user.roomName},function(err,room){
       let i=0;
-      while(i < room.users.length){
-        if(room.users[i] === user.userName){
-          console.log(room.users[i] === user.userName);
-          room.users.splice(i,1);
-          room.save((err)=>{
-            if(!err && room.users.length === 0){
-              db.roomDetailsModel.remove({roomName:user.roomName},function(err){
-                if(!err){
-                  resolve(room.users);
-                }
-              });
-            }else{
-              resolve(room.users);
-            }
-          });
-          break;
+      if(room.users === null){
+
+      }else{
+        while(i < room.users.length){
+          if(room.users[i] === user.userName){
+            console.log(room.users[i] === user.userName);
+            room.users.splice(i,1);
+            room.save((err)=>{
+              if(!err && room.users.length === 0){
+                db.roomDetailsModel.remove({roomName:user.roomName},function(err){
+                  if(!err){
+                    resolve(room.users);
+                  }
+                });
+              }else{
+                resolve(room.users);
+              }
+            });
+            break;
+          }
+          i++;
         }
-        i++;
       }
     });
   });

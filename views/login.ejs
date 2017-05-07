@@ -61,17 +61,23 @@
         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
       }
     </style>
+    <script>
+      function join(){
+        window.location.href = "/login/"+document.getElementById("user-name-txtbox").value;
+      }
+    </script>
   </head>
   <body>
     <div id="login-div">
       <h3 id="app-tittle">Simple Chat App</h3>
       <!-- <a href="#" onClick="window.open('yourpage.htm','pagename','resizable,height=260,width=370'); return false;">New Page</a><noscript>You need Javascript to use the previous link or use <a href="yourpage.htm" target="_blank">New Page</a></noscript> -->
-      <form action="/login" method="post">
+
       <table id="login-table">
         <tr><td><label style="color:white;">user name :</label></td><td><input type="text" name="userName" id="user-name-txtbox" required/></td></tr>
       </table>
-      <input type="submit" value="Join" id="login-btn"/>
-    </form>
+      <button onclick="join()" id="login-btn">Join</button>
+      <!-- <input type="button" value="Join" id="login-btn"/> -->
+
     </div>
   </body>
 </html>
