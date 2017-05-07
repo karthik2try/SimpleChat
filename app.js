@@ -19,7 +19,7 @@ app.set('view engine','ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/',require('./router'));
-sockHttp.socketHTTP(app).listen(3000,function(err){
+sockHttp.socketHTTP(app).listen( process.env.PORT || 3000,function(err){
   if(err){
     console.log(err);
   }else {
