@@ -1,9 +1,9 @@
 'use strict';
 const db = require('../db');
 
-function removeUser(){
+function removeUser(userName){
   return new Promise(function(resolve,reject){
-    db.userModel.remove({chat_id:chat_id},function(err){
+    db.userModel.remove({userName:userName},function(err){
       if(!err){
         resolve(true);
       }else{
@@ -160,5 +160,6 @@ module.exports = {
   removeUserByRoomID,
   removeUserByChatId,
   removeUserFromChatRoom,
-  addChatID
+  addChatID,
+  removeUser
 }
