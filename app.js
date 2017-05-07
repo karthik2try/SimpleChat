@@ -4,7 +4,6 @@ const sockHttp = require('./socket');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-
 app.use(cors({
     'allowedHeaders': ['sessionId', 'Content-Type'],
     'exposedHeaders': ['sessionId'],
