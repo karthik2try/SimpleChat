@@ -42,13 +42,16 @@
         $('.container-body').append(populateChatRooms(newRoom));
         document.getElementById("room-ip-box").value = "";
       }
+      function logout(){
+        window.location.href = "/logout/"+ userName;
+      }
     </script>
   </head>
   <body>
     <div id="container">
       <div id="container-head">
         <table id="title-tbl">
-          <tr><td id="title-td"><h3>Please select/create chatroom</h3></td><td id="link-td">Hi <%=userName%></td><td id="link-td"><a href="#">Logout</a></td></tr>
+          <tr><td id="title-td"><h3>Please select/create chatroom</h3></td><td id="link-td">Hi <%=userName%> !!</td><td id="link-td"><a href="#" onclick="logout()">Logout</a></td></tr>
         </table>
       </div>
       <div id="container-body" class="container-body">

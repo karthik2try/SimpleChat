@@ -28,6 +28,7 @@
   overflow-y: auto;
 }
 #title-td{
+  font-style: normal;
   text-overflow: ellipsis;
   max-width: 60%;
   text-align: center;
