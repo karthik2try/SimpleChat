@@ -25,7 +25,7 @@
       function populateChatRooms(roomsList){
 
 
-        return `<a href="/room/<%=userName%>/${roomsList.roomName}"><div id="chatroom-list">
+        return `<a href="https://simp-chat-app.herokuapp.com/room/<%=userName%>/${roomsList.roomName}"><div id="chatroom-list">
           <table id="list-tbl">
           <tr><td id="content-td">${roomsList.roomName}</td><td id="user-td">users : ${roomsList.users.length}</td><tr>
           </table>
