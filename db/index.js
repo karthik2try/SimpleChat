@@ -8,15 +8,12 @@ mongoose.connect('mongodb://chatuser:chatpassword@ds129641.mlab.com:29641/simple
 });
 
 const db = mongoose.connection;
-var chatRoomSchema = new mongoose.Schema({
-  chatRooms:String,
-  NoOfUsers:Number
-});
-
-var chatRoomModel = mongoose.model('chatRoomModel',chatRoomSchema);
 
 var userSchema = new mongoose.Schema({
-  userName:String
+  userName:String,
+  roomName:String,
+  room_id:String,
+  chat_id:String
 });
 
 var userModel = mongoose.model('userModel',userSchema);
@@ -29,7 +26,6 @@ var roomDetailsSchema = new mongoose.Schema({
 var roomDetailsModel = mongoose.model('roomDetailsModel',roomDetailsSchema);
 
 module.exports = {
-  chatRoomModel,
   roomDetailsModel,
   userModel
 }

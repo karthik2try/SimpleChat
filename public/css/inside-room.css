@@ -49,13 +49,27 @@
   width: 90%;
 }
 #chatroom-list{
-  margin: 10px;
+  margin: 10px 10px 30px 10px;
   background: #6699ff;
   max-width: 95%;
   border-radius: 5px;
   padding: 0 5px  5px 5px;
+  clear: both;
+  /*display: block;*/
   min-height: 7%;
   float: left;
+  /*border: 1px solid black;*/
+}
+#self-chatroom-list{
+  margin: 10px 20px 10px 10px;
+  background: #33cc33;
+  max-width: 95%;
+  border-radius: 5px;
+  padding: 0 5px  5px 5px;
+  clear: both;
+  /*display: block;*/
+  min-height: 7%;
+  float: right;
   /*border: 1px solid black;*/
 }
 #msg-header{
@@ -67,6 +81,7 @@
 }
 #time-stamp{
   float: right;
+  margin-left: 20px;
 }
 #msg-user{
   float: left;
@@ -150,6 +165,7 @@
   width: 74%;
   border-right: 1px solid #6699ff;
   height: 100%;
+  display: block;
   float: left;
 }
 #user-list-sec{

@@ -11,6 +11,7 @@
       var socket = io('/rooms');
       var container_body = $('.container-body');
       let userName = '<%=userName%>';
+      socket.emit('registerSocketID',userName);
       socket.emit('getRooms');
       socket.on('roomDetails',function(data){
         console.log(data);

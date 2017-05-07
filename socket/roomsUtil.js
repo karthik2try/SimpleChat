@@ -2,19 +2,41 @@
 const db = require('../db');
 const dbUtil = require('../dbUtil');
 module.exports = function(socket){
-  socket.on('createNewRoom',function(data){
-    dbUtil.addRooms(data)
-    .then(function(result){
-      if(result === 'success'){
-        data = [data];
-        console.log(data);
-        socket.broadcast.emit('roomDetails',data);
-      }
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
+  socket.on('registerSocketID',function(userName){
+    dbUtil.addRoomsID(userName,socket.id);
   });
+  socket.on('createNewRoom',function(data){
+          dbUtil.addRooms(data)
+          .then(function(result){
+            if(result === 'success'){
+              data = [data];
+              console.log(data);
+              socket.broadcast.emit('roomDetails',data);
+            }
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
+        });
+
+  // socket.on('disconnect',function(){
+  //   dbUtil.findUserDetailsRI(socket.id)
+  //     .then(function(user){
+  //       console.log(user);
+  //       dbUtil.removeUserByRoomID(socket.id)
+  //         .then(function(result){
+  //           if(result){
+  //             // console.log(user.userName," removed");
+  //           }
+  //         })
+  //         .catch(function(err){
+  //           console.log(err);
+  //         })
+  //     })
+  //     .catch(function(err){
+  //       console.log(err);
+  //     })
+  // });
   socket.on('getRooms',function(){
     db.roomDetailsModel.find(function(err,data){
       if(!err){

@@ -4,6 +4,7 @@ function socketHTTP(app){
   const http = require('http').Server(app);
   const io = require('socket.io')(http);
   io.of('/rooms').on('connection',function(socket){
+    console.log(socket.id);
     console.log('user connected');
     require('./roomsUtil')(socket);
   });

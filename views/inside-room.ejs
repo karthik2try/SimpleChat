@@ -15,12 +15,60 @@
     var joinDetails = {roomName:roomName,userName:userName};
     console.log(joinDetails);
     socket.emit('join',joinDetails);
+
+    function usersListHTMLfn(user){
+      return `<a href="#"><div id="user-name">${user}</div></a>`
+    }
+    let disconnectDetails = {
+      roomName:roomName,
+      userName:userName
+    }
+    socket.emit('disconnect',disconnectDetails);
+
     socket.on('getUserList',function(userLists){
+      console.log('userLists : ',userLists);
       for(var user of userLists){
-        userListsHTML += `<a href="#"><div id="user-name">${user}</div></a>`;
+        userListsHTML += usersListHTMLfn(user);
       }
-      $('#user-list-sec').append(userListsHTML);
+      $('#user-list-sec').html("");
+      $('#user-list-sec').html(userListsHTML);
+      userListsHTML = "";
     });
+
+    socket.on('receiveMsg',function(msgData){
+      $("#chat-sec").append(`
+        <div id="chatroom-list">
+          <div id="msg-header">
+            <a href="#" id="msg-user">${msgData.userName} :</a>
+            <label id="time-stamp">${msgData.timeStamp}</label>
+          </div>
+          ${msgData.msg}
+        </div>
+        `);
+    });
+
+    function sendMsg(){
+        let msg = document.getElementById("room-ip-box").value;
+        let time = new Date();
+        let curTime = time.getHours() + ':' + time.getMinutes();
+        let msgData = {
+          msg:msg,
+          userName:userName,
+          timeStamp:curTime,
+          roomName:roomName
+        }
+        $("#chat-sec").append(`
+          <div id="self-chatroom-list">
+            <div id="msg-header">
+              <a href="#" id="msg-user">${msgData.userName} :</a>
+              <label id="time-stamp">${msgData.timeStamp}</label>
+            </div>
+            ${msgData.msg}
+          </div>
+          `);
+        socket.emit('sendMsg',msgData);
+        document.getElementById("room-ip-box").value = ""
+    }
     </script>
   </head>
   <body>
@@ -32,13 +80,13 @@
       </div>
       <div id="container-body">
         <div id="chat-sec">
-          <div id="chatroom-list">
+          <!-- <div id="chatroom-list">
             <div id="msg-header">
               <a href="#" id="msg-user">karthik</a>
               <label id="time-stamp">8.13 pm</label>
             </div>
-          I am doing online quiz app in php. I want to restrict user while going back in exam. I have tried following script but
-          </div>
+           msg
+          </div> -->
       </div>
         <div id="user-list-sec">
           <!-- <a href="#"><div id="user-name">karthik</div></a> -->
@@ -47,7 +95,7 @@
       </div>
       <div id="container-foot">
         <div id="input-box"><textarea id="room-ip-box" name="roomName" placeholder="type your msg here ...."></textarea></div>
-          <div id="create-btn"><input type="submit" id="room-ip-btn" value="send"/></div>
+          <div id="create-btn"><button id="room-ip-btn" onclick="sendMsg()">send<button></div>
       </div>
     </div>
   </body>
